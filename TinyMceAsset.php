@@ -10,7 +10,7 @@ use yii\web\AssetBundle;
 
 class TinyMceAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/dosamigos/yii2-tinymce-widget/assets';
+    public $sourcePath = '@vendor/2amigos/yii2-tinymce-widget/assets';
 
     public $js = ['tinymce.min.js'];
 } 
