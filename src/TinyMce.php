@@ -74,7 +74,6 @@ class TinyMce extends InputWidget
         if ($this->setOnChangeEvent === true) {
             $js[] = "setTimeout(function(){ tinymce.get('{$id}').off('change').on('change', function(e){ $('#{$id}').val(e.content);})}, 500);";
         }
-
         $view->registerJs(implode("\n", $js));
     }
 }
