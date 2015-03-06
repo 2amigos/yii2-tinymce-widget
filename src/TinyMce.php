@@ -62,9 +62,11 @@ class TinyMce extends InputWidget
         $id = $this->options['id'];
 
         $this->clientOptions['selector'] = "#$id";
+        // @codeCoverageIgnoreStart
         if ($this->language !== null) {
             $this->clientOptions['language'] = $this->language;
         }
+        // @codeCoverageIgnoreEnd
 
         $options = Json::encode($this->clientOptions);
 
