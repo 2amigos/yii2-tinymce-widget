@@ -50,7 +50,7 @@ class TinyMce extends InputWidget
     }
 
     /**
-     * Registers Twitter TypeAhead Bootstrap plugin and the related events
+     * Registers tinyMCE js plugin
      */
     protected function registerClientScript()
     {
