@@ -69,8 +69,11 @@ class TinyMce extends InputWidget
         $options = Json::encode($this->clientOptions);
 
         $js[] = "tinymce.init($options);";
+        if($this->setOnChangeEvent === true)
+        {
+            $js[] = "setTimeout(function(){ tinymce.get('{$id}').off('change').on('change', function(e){ $('#{$id}').val(e.content);})}, 500);";
+        }
 
-        $js[] =
-        $view->registerJs("tinymce.init($options);");
+        $view->registerJs(implode("\n", $js));
     }
 }

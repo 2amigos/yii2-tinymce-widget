@@ -55,9 +55,10 @@ class TinyMceTest extends TestCase
         $widget = TestTinyMce::begin(
             [
                 'model' => $model,
-                'attribute' => 'message',
+                'attribute' => 'message'
             ]
         );
+        $class->getProperty('setOnChangeEvent')->setValue($widget, false);
         $view = $this->getView();
         $widget->setView($view);
         $method->invoke($widget);
@@ -69,18 +70,23 @@ JS;
 
     public function testTinyMceRegisterClientScriptMethodWithLanguage()
     {
+        $class = new \ReflectionClass('tests\\data\\overrides\\TestTinyMce');
+        $method = $class->getMethod('registerClientScript');
+        $method->setAccessible(true);
+        $model = new Post();
         $widget = TestTinyMce::begin(
             [
-                'id' => 'test-id',
-                'name' => 'test-name'
+                'model' => $model,
+                'attribute' => 'message'
             ]
         );
-        $widget->language = 'es';
         $view = $this->getView();
         $widget->setView($view);
-        $widget->end();
+        $class->getProperty('language')->setValue($widget, 'es');
+        $method->invoke($widget);
         $test = <<<JS
-tinymce.init({"selector":"#test-id","language":"es"});
+tinymce.init({"selector":"#post-message","language":"es"});
+setTimeout(function(){ tinymce.get('post-message').off('change').on('change', function(e){ $('#post-message').val(e.content);})}, 500);
 JS;
         $this->assertEquals($test, $view->js[View::POS_READY]['test-tinymce-js']);
     }
