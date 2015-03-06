@@ -62,15 +62,14 @@ class TinyMce extends InputWidget
         $id = $this->options['id'];
 
         $this->clientOptions['selector'] = "#$id";
-        if($this->language !== null) {
+        if ($this->language !== null) {
             $this->clientOptions['language'] = $this->language;
         }
 
         $options = Json::encode($this->clientOptions);
 
         $js[] = "tinymce.init($options);";
-        if($this->setOnChangeEvent === true)
-        {
+        if ($this->setOnChangeEvent === true) {
             $js[] = "setTimeout(function(){ tinymce.get('{$id}').off('change').on('change', function(e){ $('#{$id}').val(e.content);})}, 500);";
         }
 
