@@ -50,7 +50,8 @@ use dosamigos\tinymce\TinyMce;
 
 Further Information
 -------------------
-Please, check the [TinyMCE plugin site](http://www.tinymce.com/wiki.php/Configuration) documentation for further information about its configuration options.
+Please, check the [TinyMCE plugin site](http://www.tinymce.com/wiki.php/Configuration) documentation for further 
+information about its configuration options.
 
 
 > [![2amigOS!](http://www.gravatar.com/avatar/55363394d72945ff7ed312556ec041e0.png)](http://www.2amigos.us)  
