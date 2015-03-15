@@ -1,5 +1,5 @@
-TinyMCE Widget for Yii2
-=======================
+# TinyMCE Widget for Yii2
+
 
 [![Latest Version](https://img.shields.io/github/tag/2amigos/yii2-tinymce-widget.svg?style=flat-square&label=release)](https://github.com/2amigos/yii2-tinymce-widget/tags)
 [![Software License](https://img.shields.io/badge/license-BSD-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -10,8 +10,8 @@ TinyMCE Widget for Yii2
 
 Renders a [TinyMCE WYSIWYG text editor plugin](http://www.tinymce.com/) widget.
 
-Installation
-------------
+## Installation
+
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
 Either run
@@ -27,8 +27,8 @@ or add
 
 to the require section of your application's `composer.json` file.
 
-Usage
------
+## Usage
+
 
 ```
 
@@ -48,10 +48,29 @@ use dosamigos\tinymce\TinyMce;
 ]);?>
 ```
 
-Further Information
--------------------
+## Testing
+
+``` bash
+$ phpunit
+```
+
+## Further Information
+
 Please, check the [TinyMCE plugin site](http://www.tinymce.com/wiki.php/Configuration) documentation for further 
 information about its configuration options.
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
+## Credits
+
+- [Antonio Ramirez](https://github.com/tonydspaniard)
+- [All Contributors](../../contributors)
+
+## License
+
+The BSD License (BSD). Please see [License File](LICENSE.md) for more information.
 
 
 > [![2amigOS!](http://www.gravatar.com/avatar/55363394d72945ff7ed312556ec041e0.png)](http://www.2amigos.us)  
