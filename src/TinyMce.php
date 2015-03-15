@@ -64,7 +64,10 @@ class TinyMce extends InputWidget
         $this->clientOptions['selector'] = "#$id";
         // @codeCoverageIgnoreStart
         if ($this->language !== null) {
-            $this->clientOptions['language'] = $this->language;
+            $langFile = "langs/{$this->language}.js";
+            $langAssetBundle = TinyMceLangAsset::register($view);
+            $langAssetBundle->js[] = $langFile;
+            $this->clientOptions['language_url'] = $langAssetBundle->baseUrl . "/{$langFile}";
         }
         // @codeCoverageIgnoreEnd
 
