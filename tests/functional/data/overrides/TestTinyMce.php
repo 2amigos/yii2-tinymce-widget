@@ -28,19 +28,17 @@ class TestTinyMce extends TinyMce
 
         $id = $this->options['id'];
 
-        $this->clientOptions['selector'] = "#$id";
+        $this->clientOptions['selector'] = "#{$id}";
         if ($this->language !== null) {
             $this->clientOptions['language'] = $this->language;
         }
 
         $options = Json::encode($this->clientOptions);
 
-        $js[] = "tinymce.init($options);";
-        if($this->setOnChangeEvent === true)
-        {
-            $js[] = "setTimeout(function(){ tinymce.get('{$id}').off('change').on('change', function(e){ $('#{$id}').val(e.content);})}, 500);";
+        $js[] = "tinymce.init({$options});";
+        if ($this->triggerSaveOnBeforeValidateForm) {
+            $js[] = "$('#{$id}').parents('form').on('beforeValidate', function() { tinymce.triggerSave(); });";
         }
-
         $view->registerJs(implode("\n", $js), View::POS_READY, 'test-tinymce-js');
     }
 }

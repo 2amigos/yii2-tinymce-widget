@@ -58,7 +58,7 @@ class TinyMceTest extends TestCase
                 'attribute' => 'message'
             ]
         );
-        $class->getProperty('setOnChangeEvent')->setValue($widget, false);
+        $class->getProperty('triggerSaveOnBeforeValidateForm')->setValue($widget, false);
         $view = $this->getView();
         $widget->setView($view);
         $method->invoke($widget);
@@ -86,7 +86,7 @@ JS;
         $method->invoke($widget);
         $test = <<<JS
 tinymce.init({"selector":"#post-message","language":"es"});
-setTimeout(function(){ tinymce.get('post-message').off('change').on('change', function(e){ $('#post-message').val(e.content);})}, 500);
+$('#post-message').parents('form').on('beforeValidate', function() { tinyMCE.triggerSave(); });
 JS;
         $this->assertEquals($test, $view->js[View::POS_READY]['test-tinymce-js']);
     }
