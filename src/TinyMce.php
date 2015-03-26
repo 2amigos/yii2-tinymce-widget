@@ -31,10 +31,12 @@ class TinyMce extends InputWidget
      */
     public $clientOptions = [];
     /**
-     * @var bool whether to set the on change event for the editor. This is required to be able to validate data.
+     * Whether to call tinyMCE.triggerSave() on beforeValidate form event.
+     * Added to solve problem with client validation. Default true
      * @see https://github.com/2amigos/yii2-tinymce-widget/issues/7
+     * @var boolean
      */
-    public $setOnChangeEvent = true;
+    public $triggerSaveOnBeforeValidateForm = true;
 
     /**
      * @inheritdoc
@@ -61,7 +63,7 @@ class TinyMce extends InputWidget
 
         $id = $this->options['id'];
 
-        $this->clientOptions['selector'] = "#$id";
+        $this->clientOptions['selector'] = "#{$id}";
         // @codeCoverageIgnoreStart
         if ($this->language !== null) {
             $langFile = "langs/{$this->language}.js";
@@ -73,9 +75,9 @@ class TinyMce extends InputWidget
 
         $options = Json::encode($this->clientOptions);
 
-        $js[] = "tinymce.init($options);";
-        if ($this->setOnChangeEvent === true) {
-            $js[] = "setTimeout(function(){ tinymce.get('{$id}').off('change').on('change', function(e){ $('#{$id}').val(e.content);})}, 500);";
+        $js[] = "tinymce.init({$options});";
+        if ($this->triggerSaveOnBeforeValidateForm) {
+            $js[] = "$('#{$id}').parents('form').on('beforeValidate', function() { tinymce.triggerSave(); });";
         }
         $view->registerJs(implode("\n", $js));
     }
