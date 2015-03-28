@@ -76,6 +76,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
                             'scriptUrl' => '/index.php',
                         ],
                         'assetManager' => [
+                            'class' => 'tests\AssetManager',
                             'basePath' => '@tests/assets',
                             'baseUrl' => '/',
                         ]
