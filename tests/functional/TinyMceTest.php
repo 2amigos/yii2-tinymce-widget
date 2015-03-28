@@ -1,22 +1,17 @@
 <?php
 /**
- *
- * TinyMceTest.php
- *
- * Date: 06/03/15
- * Time: 13:53
- * @author Antonio Ramirez <amigo.cobos@gmail.com>
- * @link http://www.ramirezcobos.com/
- * @link http://www.2amigos.us/
+ * @link https://github.com/2amigos/yii2-tinymce-widget
+ * @copyright Copyright (c) 2013-2015 2amigOS! Consulting Group LLC
+ * @license http://opensource.org/licenses/BSD-3-Clause
  */
-
 namespace tests;
 
 
 use dosamigos\tinymce\TinyMce;
-use tests\data\models\Post;
-use tests\data\overrides\TestTinyMce;
+use tests\models\Post;
+use tests\overrides\TestTinyMce;
 use yii\web\View;
+use Yii;
 
 class TinyMceTest extends TestCase
 {
@@ -48,7 +43,7 @@ class TinyMceTest extends TestCase
 
     public function testTinyMceRegisterClientScriptMethod()
     {
-        $class = new \ReflectionClass('tests\\data\\overrides\\TestTinyMce');
+        $class = new \ReflectionClass('tests\\overrides\\TestTinyMce');
         $method = $class->getMethod('registerClientScript');
         $method->setAccessible(true);
         $model = new Post();
@@ -58,7 +53,7 @@ class TinyMceTest extends TestCase
                 'attribute' => 'message'
             ]
         );
-        $class->getProperty('setOnChangeEvent')->setValue($widget, false);
+        $class->getProperty('triggerSaveOnBeforeValidateForm')->setValue($widget, false);
         $view = $this->getView();
         $widget->setView($view);
         $method->invoke($widget);
@@ -70,7 +65,7 @@ JS;
 
     public function testTinyMceRegisterClientScriptMethodWithLanguage()
     {
-        $class = new \ReflectionClass('tests\\data\\overrides\\TestTinyMce');
+        $class = new \ReflectionClass('tests\\overrides\\TestTinyMce');
         $method = $class->getMethod('registerClientScript');
         $method->setAccessible(true);
         $model = new Post();
@@ -85,9 +80,19 @@ JS;
         $class->getProperty('language')->setValue($widget, 'es');
         $method->invoke($widget);
         $test = <<<JS
-tinymce.init({"selector":"#post-message","language":"es"});
-setTimeout(function(){ tinymce.get('post-message').off('change').on('change', function(e){ $('#post-message').val(e.content);})}, 500);
+tinymce.init({"selector":"#post-message","language_url":"/1/langs/es.js"});
+$('#post-message').parents('form').on('beforeValidate', function() { tinymce.triggerSave(); });
 JS;
         $this->assertEquals($test, $view->js[View::POS_READY]['test-tinymce-js']);
+    }
+
+    public function testWidget(){
+        $model = new Post();
+        $view = Yii::$app->getView();
+        $content = $view->render('//tinymce-widget', ['model' => $model]);
+        $actual = $view->render('//layouts/main', ['content' => $content]);
+
+        $expected = file_get_contents(__DIR__ . '/data/test-tinymce-widget.bin');
+        $this->assertEquals($expected, $actual);
     }
 }
