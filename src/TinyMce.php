@@ -72,6 +72,12 @@ class TinyMce extends InputWidget
         // @codeCoverageIgnoreEnd
 
         $options = Json::encode($this->clientOptions);
+        if (isset($this->clientOptions['file_picker_callback'])) {
+            $options = str_replace('"' . $this->clientOptions['file_picker_callback'] . '"', $this->clientOptions['file_picker_callback'], $options);
+        }
+        if (isset($this->clientOptions['file_browser_callback'])) {
+            $options = str_replace('"' . $this->clientOptions['file_browser_callback'] . '"', $this->clientOptions['file_picker_callback'], $options);
+        }
 
         $js[] = "tinymce.init($options);";
         if ($this->triggerSaveOnBeforeValidateForm) {
