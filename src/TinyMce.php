@@ -76,7 +76,7 @@ class TinyMce extends InputWidget
             $options = str_replace('"' . $this->clientOptions['file_picker_callback'] . '"', $this->clientOptions['file_picker_callback'], $options);
         }
         if (isset($this->clientOptions['file_browser_callback'])) {
-            $options = str_replace('"' . $this->clientOptions['file_browser_callback'] . '"', $this->clientOptions['file_picker_callback'], $options);
+            $options = str_replace('"' . $this->clientOptions['file_browser_callback'] . '"', $this->clientOptions['file_browser_callback'], $options);
         }
 
         $js[] = "tinymce.init($options);";
