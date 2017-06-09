@@ -25,8 +25,10 @@
         "issues": "https://github.com/2amigos/yii2-tinymce-widget/issues",
         "source": "https://github.com/2amigos/yii2-tinymce-widget"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
-        "yiisoft/yii2": "~2.0.0",
+        "yiisoft/yii2": "^2.0",
         "tinymce/tinymce": ">=4"
     },
     "require-dev": {
