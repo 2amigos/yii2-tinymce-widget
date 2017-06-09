@@ -80,7 +80,7 @@ JS;
         $class->getProperty('language')->setValue($widget, 'es');
         $method->invoke($widget);
         $test = <<<JS
-tinymce.init({"selector":"#post-message","language_url":"/1/langs/es.js"});
+tinymce.init({"selector":"#post-message","language_url":"\/1\/langs\/es.js"});
 $('#post-message').parents('form').on('beforeValidate', function() { tinymce.triggerSave(); });
 JS;
         $this->assertEquals($test, $view->js[View::POS_READY]['test-tinymce-js']);
