@@ -48,6 +48,31 @@ use dosamigos\tinymce\TinyMce;
 ]);?>
 ```
 
+### About ClientOptions 
+
+Please, remember that if you are required to add javascript to the configuration of the js plugin and is required to be 
+plain JS, make use of `JsExpression`. That class was made by Yii for that specific purpose. For example:
+ 
+```php 
+// Having the following scenario
+<script> 
+    function jsFunctionToBeCalled() {
+        // ...
+    }
+</script>
+
+<?= $form->field($model, 'content')->widget(TinyMce::className(), [
+    'options' => ['rows' => 16],
+    'language' => 'en_GB',
+    'clientOptions' => 
+        // ...
+        // this will render the function name without quotes on the configuration options of the plugin
+        'file_picker_callback' => new JsExpression('jsFunctionToBeCalled'),
+        // ...
+    ]
+]); ?>
+```
+
 ## Testing
 
 ``` bash
