@@ -168,6 +168,7 @@ tinymce.addI18n('it',{
 "Show blocks": "Mostra Blocchi",
 "Show invisible characters": "Mostra Caratteri Invisibili",
 "Words: {0}": "Parole: {0}",
+"{0} words": "{0} Parole",
 "Insert": "Inserisci",
 "File": "File",
 "Edit": "Modifica",
