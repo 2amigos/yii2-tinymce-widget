@@ -68,6 +68,7 @@ class TinyMce extends InputWidget
             $langAssetBundle = TinyMceLangAsset::register($view);
             $langAssetBundle->js[] = $langFile;
             $this->clientOptions['language_url'] = $langAssetBundle->baseUrl . "/{$langFile}";
+            $this->clientOptions['language'] = "{$this->language}";//Language fix. Without it EN language when add some plugins like codemirror 
         }
         // @codeCoverageIgnoreEnd
 
