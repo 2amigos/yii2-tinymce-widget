@@ -39,6 +39,19 @@ class TinyMce extends InputWidget
     /**
      * @inheritdoc
      */
+    public function init()
+    {
+        parent::init();
+
+        if (empty($this->language)) {
+            $this->language = \Yii::$app->language;
+        }
+
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function run()
     {
         if ($this->hasModel()) {
