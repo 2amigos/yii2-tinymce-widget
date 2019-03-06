@@ -74,7 +74,7 @@ class TinyMce extends InputWidget
 
         $options = Json::encode($this->clientOptions);
 
-        $js[] = "tinymce.init($options);";
+        $js[] = "tinymce.remove('#$id');tinymce.init($options);";
         if ($this->triggerSaveOnBeforeValidateForm) {
             $js[] = "$('#{$id}').parents('form').on('beforeValidate', function() { tinymce.triggerSave(); });";
         }
