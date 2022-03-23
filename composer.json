@@ -29,7 +29,7 @@
     "prefer-stable": true,
     "require": {
         "yiisoft/yii2": "^2.0",
-        "tinymce/tinymce": ">=4"
+        "tinymce/tinymce": "~5.10.3",
     },
     "require-dev": {
         "phpunit/phpunit": "4.*"
